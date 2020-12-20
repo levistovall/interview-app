@@ -1,5 +1,7 @@
 package execution;
 
+import data.TweetMetrics;
+
 public class DisplayTweetMetricsTask implements Runnable {
     private TweetMetrics tweetMetrics;
 

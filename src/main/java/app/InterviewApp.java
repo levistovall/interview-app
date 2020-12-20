@@ -22,10 +22,9 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 import config.InterviewAppConfiguration;
+import data.TweetMetrics;
 import execution.DisplayTweetMetricsTask;
 import execution.RecordTweetMetricsTask;
-import execution.TweetMetrics;
-import execution.TweetStreamer;
 
 /*
  * Sample code to demonstrate the use of the Sampled Stream endpoint

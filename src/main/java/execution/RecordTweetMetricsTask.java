@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import data.TweetMetrics;
+
 public class RecordTweetMetricsTask implements Runnable {
     private TweetMetrics tweetMetrics;
     private String tweet;
@@ -19,7 +21,6 @@ public class RecordTweetMetricsTask implements Runnable {
     public void run() {
         JSONObject tweetEntities;
         try {
-            //System.out.println(tweet.toString());
             tweetEntities = new JSONObject(tweet)  
                 .getJSONObject("data")
                 .optJSONObject("entities");
