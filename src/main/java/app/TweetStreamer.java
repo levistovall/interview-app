@@ -26,9 +26,6 @@ import data.TweetMetrics;
 import execution.DisplayTweetMetricsTask;
 import execution.RecordTweetMetricsTask;
 
-/*
- * Sample code to demonstrate the use of the Sampled Stream endpoint
- * */
 public class TweetStreamer {
 
     private InterviewAppConfiguration config;
@@ -56,9 +53,6 @@ public class TweetStreamer {
         bufferedReader = new BufferedReader(new InputStreamReader((entity.getContent())));
     }
 
-    /*
-     * This method calls the sample stream endpoint and streams Tweets from it
-     */
     public String getNextTweet() throws IOException {
         return bufferedReader.readLine();
     }

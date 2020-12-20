@@ -26,9 +26,6 @@ import data.TweetMetrics;
 import execution.DisplayTweetMetricsTask;
 import execution.RecordTweetMetricsTask;
 
-/*
- * Sample code to demonstrate the use of the Sampled Stream endpoint
- * */
 public class InterviewApp {
   private static InterviewAppConfiguration config;
 
@@ -58,9 +55,6 @@ public class InterviewApp {
     recordingThreadService = Executors.newCachedThreadPool();
   }
 
-  /*
-   * This method calls the sample stream endpoint and streams Tweets from it
-   */
   private static void startRecordingTweetMetrics() throws IOException, URISyntaxException {
     tweetStreamer.startStreamingTweets();
     String tweet = tweetStreamer.getNextTweet();
