@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONObject;
@@ -53,6 +54,8 @@ public class InterviewApp {
     displayThreadService = Executors.newScheduledThreadPool(1);
     
     recordingThreadService = Executors.newCachedThreadPool();
+    
+    DisplayTweetMetricsTask.setThreadPoolExecutor((ThreadPoolExecutor) recordingThreadService);
   }
 
   private static void startRecordingTweetMetrics() throws IOException, URISyntaxException {
@@ -60,7 +63,9 @@ public class InterviewApp {
     String tweet = tweetStreamer.getNextTweet();
     while(tweet != null) {
       if(tweet.length() > 0) {
-        recordingThreadService.submit(new RecordTweetMetricsTask(tweetMetrics, tweet));
+        for(int i = 0; i < 100; i++) {
+          recordingThreadService.submit(new RecordTweetMetricsTask(tweetMetrics, tweet));
+        }
       }
       tweet = tweetStreamer.getNextTweet();
     }

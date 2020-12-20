@@ -12,6 +12,9 @@ public class RecordTweetMetricsTask implements Runnable {
     private TweetMetrics tweetMetrics;
     private String tweet;
     
+    private static long averageTaskDurationMicroseconds = 0;
+    private static long numTasks = 0;
+    
     public RecordTweetMetricsTask(TweetMetrics tweetMetrics, String tweet) {
         this.tweetMetrics = tweetMetrics;
         this.tweet = tweet;
@@ -19,6 +22,7 @@ public class RecordTweetMetricsTask implements Runnable {
     
     @Override
     public void run() {
+        long begin = System.nanoTime();
         JSONObject tweetEntities;
         try {
             tweetEntities = new JSONObject(tweet)  
@@ -40,5 +44,13 @@ public class RecordTweetMetricsTask implements Runnable {
             e.printStackTrace();
         }
         tweetMetrics.incrementTotalTweets();
+        
+        long duration = System.nanoTime() - begin;
+        averageTaskDurationMicroseconds = (averageTaskDurationMicroseconds * numTasks + duration) / (numTasks+1);
+        numTasks++;
+    }
+    
+    public static long getAverageTaskDuration() {
+        return averageTaskDurationMicroseconds;
     }
 }
